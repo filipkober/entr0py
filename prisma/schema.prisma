@@ -1,0 +1,41 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  entropy   String   @unique
+  formAnswer FormAnswer?
+  levels    Level[]
+}
+
+model FormAnswer {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int @unique
+  favColor String
+  favAnimal String
+  favCrisis String
+  name      String
+  whatWouldYouBe String
+  deepestSecret String
+}
+
+model Level {
+  id Int @id @default(autoincrement())
+  user User @relation(fields: [userId], references: [id])
+  userId Int
+  name String
+  hintsUsed Int
+  timeTaken Float
+  completed Boolean
+  level_index Int
+}
