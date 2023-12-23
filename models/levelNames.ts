@@ -1,0 +1,1 @@
+export const levelNames = ["80808", "Hazard Duty Pay!", "Krystle", "Rainbow Six", "Hollywood Baby", "Western Union", "Toothless", "God Loves You", "Known For It", "Drake Era", "Out By 16, Dead on the Scene", "The Fear", "Tantor", "Deathcamp", "Burfict", "The 27 Club", "Free The Frail", "Today"];

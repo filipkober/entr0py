@@ -17,5 +17,5 @@ export async function POST(req: Request) {
         text: '- .-- --- .--- / -.- --- -.. ---... / ---.. ---.. ---.. ..... ..... ...--',
     })
 
-    return { body };
+    return NextResponse.json({ message: 'Email sent' })
 }

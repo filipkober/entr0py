@@ -1,9 +1,8 @@
+import { levelNames } from "@/models/levelNames";
 import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
-
-export const levelNames = ["80808", "Hazard Duty Pay!", "Krystle", "Rainbow Six", "Hollywood Baby", "Western Union", "Toothless", "God Loves You", "Known For It", "Drake Era", "Out By 16, Dead on the Scene", "The Fear", "Tantor", "Deathcamp", "Burfict", "The 27 Club", "Free The Frail", "Today"]
 
 export async function POST(req: Request) {
     const body = await req.json();
@@ -33,9 +32,10 @@ export async function POST(req: Request) {
     })
 
     for (let i = 0; i < 18; i++) {
+        const levelName: string = levelNames[i] || "Unknown"
         await prisma.level.create({
             data: {
-                name: levelNames[i],
+                name: levelName,
                 level_index: i,
                 user: {
                     connect: {
