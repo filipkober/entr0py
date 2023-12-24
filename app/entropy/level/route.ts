@@ -7,9 +7,15 @@ export async function PUT(req: Request) {
     const body = await req.json();
     const { entropy, timeTaken, hintsUsed, completed, level_index } = body;
     console.log(body)
-    if (!entropy || !timeTaken || !hintsUsed || !completed || !level_index) {
-        console.log("Missing fields")
-        return NextResponse.json({message: "Missing fields"}, {status: 400})
+    let errors = [];
+    entropy ?? errors.push("entropy is not defined");
+    timeTaken ?? errors.push("timeTaken is not defined");
+    hintsUsed ?? errors.push("hintsUsed is not defined");
+    completed ?? errors.push("completed is not defined");
+    level_index ?? errors.push("level_index is not defined");
+
+    if (errors.length > 0) {
+        return NextResponse.json({message: "Missing values: " + errors.join(", ")}, {status: 400});
     }
 
     const user = await prisma.user.findUnique({
