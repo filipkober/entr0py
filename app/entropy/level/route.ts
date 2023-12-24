@@ -22,6 +22,7 @@ export async function PUT(req: Request) {
             entropy
         }
     })
+    console.log("user: ", user)
     if (!user) {
         return NextResponse.json({message: "User not found"}, {status: 404})
     }
@@ -34,15 +35,15 @@ export async function PUT(req: Request) {
             level_index
         }
     })
+    console.log("level: ", level)
     if (!level) {
         return NextResponse.json({message: "Level not found"}, {status: 404})
     }
 
     if (level.completed) {
+        console.log("level already completed")
         return NextResponse.json({message: "Level already completed"}, {status: 400})
     }
-
-    console.log(level)
 
     const updated = await prisma.level.update({
         where: {
