@@ -6,6 +6,9 @@ const prisma = new PrismaClient();
 export async function PUT(req: Request) {
     const body = await req.json();
     const { entropy, timeTaken, hintsUsed, completed, level_index } = body;
+
+    console.log(body)
+
     let errors = [];
     entropy ?? errors.push("entropy is not defined");
     timeTaken ?? errors.push("timeTaken is not defined");
