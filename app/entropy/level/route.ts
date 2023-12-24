@@ -8,6 +8,8 @@ export async function PUT(req: Request) {
     const { entropy, timeTaken, hintsUsed, completed, level_index } = body;
 
     console.log(body)
+    console.log("entropy: ", entropy)
+    console.log("completed: ", completed)
 
     let errors = [];
     if (entropy === null || entropy === undefined) errors.push("entropy");
