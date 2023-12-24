@@ -14,6 +14,7 @@ export async function PUT(req: Request) {
     level_index ?? errors.push("level_index is not defined");
 
     if (errors.length > 0) {
+        console.log("errors: ", errors)
         return NextResponse.json({message: "Missing values: " + errors.join(", ")}, {status: 400});
     }
 
