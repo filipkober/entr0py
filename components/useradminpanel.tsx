@@ -21,6 +21,8 @@ type User = Prisma.UserGetPayload<typeof userWithData>;
 export default function UserAdminPanel({ users }: { users: User[] }) {
   const [selectedUser, setSelectedUser] = useState(users[0]);
 
+  console.log(users)
+
   return (
     <div className="flex flex-col w-full h-full justify-center items-center">
       <div className="flex gap-2 my-8">

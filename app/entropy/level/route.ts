@@ -6,7 +6,6 @@ const prisma = new PrismaClient();
 export async function PUT(req: Request) {
     const body = await req.json();
     const { entropy, timeTaken, hintsUsed, completed, level_index } = body;
-    console.log(body)
     let errors = [];
     entropy ?? errors.push("entropy is not defined");
     timeTaken ?? errors.push("timeTaken is not defined");
@@ -24,7 +23,6 @@ export async function PUT(req: Request) {
         }
     })
     if (!user) {
-        console.log("No user: " + entropy)
         return NextResponse.json({message: "User not found"}, {status: 404})
     }
 
@@ -37,12 +35,10 @@ export async function PUT(req: Request) {
         }
     })
     if (!level) {
-        console.log("No level: " + level_index)
         return NextResponse.json({message: "Level not found"}, {status: 404})
     }
 
     if (level.completed) {
-        console.log("Level already completed")
         return NextResponse.json({message: "Level already completed"}, {status: 400})
     }
 
