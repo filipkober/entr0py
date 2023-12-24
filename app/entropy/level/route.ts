@@ -10,15 +10,15 @@ export async function PUT(req: Request) {
     console.log(body)
 
     let errors = [];
-    entropy ?? errors.push("entropy is not defined");
-    timeTaken ?? errors.push("timeTaken is not defined");
-    hintsUsed ?? errors.push("hintsUsed is not defined");
-    completed ?? errors.push("completed is not defined");
-    level_index ?? errors.push("level_index is not defined");
+    if (entropy === null || entropy === undefined) errors.push("entropy");
+    if (Number.isNaN(timeTaken)) errors.push("timeTaken");
+    if (Number.isNaN(hintsUsed)) errors.push("hintsUsed");
+    if (completed === null || completed === undefined) errors.push("completed");
+    if (Number.isNaN(level_index)) errors.push("level_index");
 
     if (errors.length > 0) {
         console.log("errors: ", errors)
-        return NextResponse.json({message: "Missing values: " + errors.join(", ")}, {status: 400});
+        return NextResponse.json({message: "Missing/wrong values: " + errors.join(", ")}, {status: 400});
     }
 
     const user = await prisma.user.findUnique({
