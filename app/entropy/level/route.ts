@@ -42,7 +42,9 @@ export async function PUT(req: Request) {
         return NextResponse.json({message: "Level already completed"}, {status: 400})
     }
 
-    await prisma.level.update({
+    console.log(level)
+
+    const updated = await prisma.level.update({
         where: {
             id: level.id
         },
@@ -52,6 +54,8 @@ export async function PUT(req: Request) {
             completed
         }
     })
+
+    console.log(updated)
 
     return NextResponse.json({message: "Success!"})
 }
