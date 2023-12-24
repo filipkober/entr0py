@@ -21,12 +21,27 @@ type User = Prisma.UserGetPayload<typeof userWithData>;
 export default function UserAdminPanel({ users }: { users: User[] }) {
   const [selectedUser, setSelectedUser] = useState(users[0]);
 
-  console.log(users)
+  const deleteUserPrompt = async () => {
+    if(!selectedUser) return;
+    const superadminpassword = prompt("Podaj hasło superadmina");
+    if (!superadminpassword) return;
+
+    const res = await fetch("/entropy/user", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: selectedUser.id,
+        superadminpassword,
+      }),
+    })
+  }
 
   return (
     <div className="flex flex-col w-full h-full justify-center items-center">
       <div className="flex gap-2 my-8">
-        <h1 className="text-2xl shrink-0">Wybierz minionka: </h1>
+        <h1 className="text-2xl shrink-0">Wybierz <span onClick={deleteUserPrompt}>minionka</span>: </h1>
         <select className="w-1/3 text-3xl rounded-md font-[Arial] shrink-0">
           {users.map((user) => (
             <option

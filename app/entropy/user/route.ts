@@ -51,3 +51,34 @@ export async function POST(req: Request) {
 
     return NextResponse.json({message: "Success!"})
 }
+
+export async function DELETE(req: Request) {
+    const body = await req.json();
+    const {userId, superadminpassword} = body;
+    if (!userId || !superadminpassword) {
+        return NextResponse.json({message: "Missing fields"}, {status: 400})
+    }
+    if (superadminpassword !== process.env.SUPERADMIN_PASSWORD) {
+        return NextResponse.json({message: "Wrong password"}, {status: 401})
+    }
+
+    await prisma.level.deleteMany({
+        where: {
+            user: {
+                id: userId
+            }
+        }
+    })
+    await prisma.formAnswer.delete({
+        where: {
+            userId
+        }
+    })
+    await prisma.user.delete({
+        where: {
+            id: userId
+        }
+    })
+
+    return NextResponse.json({message: "Success!"})
+}
