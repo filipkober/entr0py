@@ -10,7 +10,11 @@
   },
   "dependencies": {
     "@formkit/auto-animate": "^0.8.1",
+    "@nivo/bar": "^0.84.0",
+    "@nivo/core": "^0.84.0",
+    "@nivo/pie": "^0.84.0",
     "@prisma/client": "^5.7.1",
+    "@radix-ui/react-progress": "^1.0.3",
     "@radix-ui/react-slot": "^1.0.2",
     "@react-three/drei": "^9.92.5",
     "@react-three/fiber": "^8.15.12",

@@ -2,9 +2,9 @@ import { levelNames } from "@/models/levelNames";
 import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
 
-const prisma = new PrismaClient();
-
 export async function POST(req: Request) {
+    
+    const prisma = new PrismaClient();
     const body = await req.json();
     const { entropy, favColor, favAnimal, favCrisis, name, whatWouldYouBe, deepestSecret } = body;
     if (!entropy || !favColor || !favAnimal || !favCrisis || !name || !whatWouldYouBe || !deepestSecret) {
@@ -48,11 +48,13 @@ export async function POST(req: Request) {
             }
         })
     }
-
+    prisma.$disconnect();
     return NextResponse.json({message: "Success!"})
 }
 
 export async function DELETE(req: Request) {
+    
+    const prisma = new PrismaClient();
     const body = await req.json();
     const {userId, superadminpassword} = body;
     if (!userId || !superadminpassword) {
@@ -79,6 +81,6 @@ export async function DELETE(req: Request) {
             id: userId
         }
     })
-
+    prisma.$disconnect();
     return NextResponse.json({message: "Success!"})
 }

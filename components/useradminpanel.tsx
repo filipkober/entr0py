@@ -8,6 +8,9 @@ import LevelPanel from "./LevelPanel";
 import LevelCarousel from "./LevelCarousel";
 import { Canvas } from "@react-three/fiber";
 import SpinningIcosahedron from "./SpinningIcosahedron";
+import { Progress } from "./ui/progress";
+import LevelStats from "./LevelStats";
+import { LevelStatsType } from "@/models/stats";
 
 const userWithData = Prisma.validator<Prisma.UserDefaultArgs>()({
   include: {
@@ -18,11 +21,11 @@ const userWithData = Prisma.validator<Prisma.UserDefaultArgs>()({
 
 type User = Prisma.UserGetPayload<typeof userWithData>;
 
-export default function UserAdminPanel({ users }: { users: User[] }) {
+export default function UserAdminPanel({ users, stats }: { users: User[], stats: LevelStatsType[] }) {
   const [selectedUser, setSelectedUser] = useState(users[0]);
 
   const deleteUserPrompt = async () => {
-    if(!selectedUser) return;
+    if (!selectedUser) return;
     const superadminpassword = prompt("Podaj hasło superadmina");
     if (!superadminpassword) return;
 
@@ -35,13 +38,18 @@ export default function UserAdminPanel({ users }: { users: User[] }) {
         userId: selectedUser.id,
         superadminpassword,
       }),
-    })
-  }
+    });
+  };
+
+  const progress =
+    (selectedUser.levels.filter((level) => level.completed).length / 18) * 100;
 
   return (
     <div className="flex flex-col w-full h-full justify-center items-center">
       <div className="flex gap-2 my-8">
-        <h1 className="text-2xl shrink-0">Wybierz <span onClick={deleteUserPrompt}>minionka</span>: </h1>
+        <h1 className="text-2xl shrink-0">
+          Wybierz <span onClick={deleteUserPrompt}>minionka</span>:{" "}
+        </h1>
         <select className="w-1/3 text-3xl rounded-md font-[Arial] shrink-0">
           {users.map((user) => (
             <option
@@ -92,14 +100,33 @@ export default function UserAdminPanel({ users }: { users: User[] }) {
           </table>
         </div>
       </div>
-        <Image src={sickdivider} alt="divider" className="h-[66.6px] object-cover my-4" />
-        <h1 className="text-2xl font-bold mb-4">POZIOMY</h1>
-        <LevelCarousel levels={selectedUser.levels} />
-        <Canvas>
-          <ambientLight />
-          <pointLight position={[10, 10, 10]} />
-          <SpinningIcosahedron />
-        </Canvas>
+      <Image
+        src={sickdivider}
+        alt="divider"
+        className="h-[66.6px] object-cover my-4"
+      />
+      <h1 className="text-2xl font-bold mb-4">POSTĘP</h1>
+      <Progress value={progress} className={"w-1/5 bg-gray-300"} />
+      <p className="text-xl">{progress}%</p>
+      <Image
+        src={sickdivider}
+        alt="divider"
+        className="h-[66.6px] object-cover my-4"
+      />
+      <h1 className="text-2xl font-bold mb-4">POZIOMY</h1>
+      <LevelCarousel levels={selectedUser.levels} />
+      <Image
+        src={sickdivider}
+        alt="divider"
+        className="h-[66.6px] object-cover my-4"
+      />
+      <h1 className="text-2xl font-bold mb-4">STATYSTYKI OGÓLNE</h1>
+      <LevelStats levelStats={stats} />
+      <Canvas>
+        <ambientLight />
+        <pointLight position={[10, 10, 10]} />
+        <SpinningIcosahedron />
+      </Canvas>
     </div>
   );
 }

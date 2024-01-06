@@ -2,10 +2,11 @@ import { PrismaClient } from "@prisma/client";
 import React from "react";
 import {cookies} from 'next/headers'
 import UserAdminPanel from "@/components/useradminpanel";
-const prisma = new PrismaClient();
+import { Level, statsFromLevels } from "@/models/stats";
 
 export default async function AdminPanel() {
 
+  const prisma = new PrismaClient();
     const cookieStore = cookies()
     const cookie = cookieStore.get('admin')?.value
     if(cookie !== process.env.ADMIN_TOKEN) {
@@ -25,7 +26,9 @@ export default async function AdminPanel() {
 
   let selectedUser = users[0];
 
+  prisma.$disconnect();
+
   return (
-    <UserAdminPanel users={users} />
+    <UserAdminPanel users={users} stats={statsFromLevels(users.map(u => u.levels as Level[]).flat())} />
   );
 }

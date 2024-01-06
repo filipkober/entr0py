@@ -1,9 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
 
-const prisma = new PrismaClient();
-
 export async function PUT(req: Request) {
+    const prisma = new PrismaClient();
     const body = await req.json();
     const { entropy, timeTaken, hintsUsed, completed, level_index } = body;
 
@@ -53,6 +52,6 @@ export async function PUT(req: Request) {
             completed
         }
     })
-    
+    prisma.$disconnect();
     return NextResponse.json({message: "Success!"})
 }
