@@ -50,16 +50,17 @@ export default function UserAdminPanel({ users, stats }: { users: User[], stats:
         <h1 className="text-2xl shrink-0">
           Wybierz <span onClick={deleteUserPrompt}>minionka</span>:{" "}
         </h1>
-        <select className="w-1/3 text-3xl rounded-md font-[Arial] shrink-0">
+        <select className="w-1/3 text-3xl rounded-md font-[Arial] shrink-0"
+        onChange={(e) => {
+          setSelectedUser(
+            users.find((u) => u.id === Number(e.target.value)) || users[0]
+          );
+        }}
+        >
           {users.map((user) => (
             <option
               key={user.id}
               value={user.id}
-              onClick={() => {
-                setSelectedUser(
-                  users.find((u) => u.id === user.id) || users[0]
-                );
-              }}
             >
               {user.formAnswer?.name}
             </option>
