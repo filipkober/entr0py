@@ -1,36 +1,13 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# entr0py
 
-## Getting Started
+## 🇵🇱
+entr0py to coś w stylu gry-łamigłówki. Jej celem było ukończenie 18 poziomów, każdy z których wymagał odgadnięcia kodu w postaci ciągu cyfr. To mały projekt, którego celem było ujawnienie zaproszenia na moje urodziny po ukończeniu wszystkich poziomów. Projekt składa się z dwóch części: [aplikacji konsolowej](https://github.com/filipkober/sekretnezaproszeniearg) i [strony internetowej (tego)](https://github.com/filipkober/entr0py), na której zawarte były niektóre łamigłówki, oraz panel administracyjny wraz z podglądem postępu uczestników, dostępnym dla tych którzy ukończyli wszystkie poziomy.
 
-First, run the development server:
+### technologie
+do wykonania strony posłużyłem się [NextJS](https://nextjs.org/), do styli użyłem [tailwindcss](https://tailwindcss.com/), do przechowywania danych i zarządzania bazą użyłem [SQLite](https://www.sqlite.org/) i [Prismy](https://www.prisma.io/). Na stronie znajdują się componenty z [shadcn](https://ui.shadcn.com/), wykresy z [nivo](https://nivo.rocks/) i elementy 3D animowane przy użyciu [Three.js](https://threejs.org/)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🇺🇸
+entr0py is something like a puzzle game. Its goal was to complete 18 levels, each requiring a code made from digits. It's a small project with the goal of revealing a birthday party invitation after completing every level. This project consists of two parts: [a console app](https://github.com/filipkober/sekretnezaproszeniearg) and [a website (this)](https://github.com/filipkober/entr0py), where some of the puzzles were located, along with an admin panel from which you could see others' progress. Panel access was available after completing all levels.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### technologies
+To make the website I used [NextJS](https://nextjs.org/), for styles I used [tailwindcss](https://tailwindcss.com/), for data storage and management I chose [SQLite](https://www.sqlite.org/) and [Prisma](https://www.prisma.io/). The website uses some components from [shadcn](https://ui.shadcn.com/), charts from [nivo](https://nivo.rocks/) and 3D models animated with [Three.js](https://threejs.org/)
